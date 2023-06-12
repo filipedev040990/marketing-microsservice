@@ -17,6 +17,5 @@ export namespace SaveLeadUseCaseInterface {
     status: string
     phoneNumber: string
     createdAt: Date
-    updatedAt: Date
   }
 }

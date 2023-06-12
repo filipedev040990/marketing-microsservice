@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. ⛔ Salva os dados do lead
+1. ✅ Salva os dados do lead
 2. ⛔ Retorna status 201
 
 > ## Exceções
