@@ -19,14 +19,22 @@ describe('SaveLeadController', () => {
     }
   })
 
-  test('should return 400 if name is not provided', async () => {
-    input.body.name = null
+  test('should return 400 if any required field does not provided', async () => {
+    const requiredFields = ['name', 'email', 'birthDate', 'phoneNumber']
 
-    const output = await sut.execute(input)
+    for (const field of requiredFields) {
+      const backupFieldValue = input.body[field]
 
-    expect(output).toEqual({
-      statusCode: 400,
-      body: new MissingParamError('name')
-    })
+      input.body[field] = null
+
+      const output = await sut.execute(input)
+
+      expect(output).toEqual({
+        statusCode: 400,
+        body: new MissingParamError(field)
+      })
+
+      input.body[field] = backupFieldValue
+    }
   })
 })

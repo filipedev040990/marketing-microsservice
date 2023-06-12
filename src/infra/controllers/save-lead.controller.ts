@@ -14,7 +14,7 @@ export class SaveLeadController implements ControllerInterface {
   }
 
   private validate (input: HttpRequest): Error | undefined {
-    const requiredFields = ['name']
+    const requiredFields = ['name', 'email', 'birthDate', 'phoneNumber']
     for (const field of requiredFields) {
       if (!input.body[field]) {
         return new MissingParamError(field)
