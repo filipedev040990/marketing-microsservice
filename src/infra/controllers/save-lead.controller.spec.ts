@@ -1,6 +1,6 @@
 import { HttpRequest } from '@/shared/types'
 import { SaveLeadController } from './save-lead.controller'
-import { MissingParamError } from '@/shared/errors'
+import { InvalidParamError, MissingParamError } from '@/shared/errors'
 
 describe('SaveLeadController', () => {
   let sut: SaveLeadController
@@ -36,5 +36,16 @@ describe('SaveLeadController', () => {
 
       input.body[field] = backupFieldValue
     }
+  })
+
+  test('should return 400 if invalid email is provided', async () => {
+    input.body.email = 'invalidEmail'
+
+    const output = await sut.execute(input)
+
+    expect(output).toEqual({
+      statusCode: 400,
+      body: new InvalidParamError('email')
+    })
   })
 })
