@@ -3,6 +3,7 @@ import { SaveLeadController } from './save-lead.controller'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { mock } from 'jest-mock-extended'
 import { SaveLeadUseCaseInterface } from '@/domain/contracts/save-lead.interface'
+import { serverError } from '@/shared/helpers/http.helper'
 
 const saveLeadUseCase = mock<SaveLeadUseCaseInterface>()
 
@@ -69,5 +70,15 @@ describe('SaveLeadController', () => {
       statusCode: 201,
       body: null
     })
+  })
+
+  test('should return 500 if SaveLeadUseCase throws', async () => {
+    saveLeadUseCase.execute.mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const output = await sut.execute(input)
+
+    expect(output).toEqual(serverError(new Error()))
   })
 })
