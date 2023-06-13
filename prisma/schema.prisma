@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Lead {
-  id          String   @id
+  id          String    @id
   name        String
   email       String
   birthDate   DateTime
   status      String
   phoneNumber String
   createdAt   DateTime
-  updatedAt   DateTime
+  updatedAt   DateTime?
 
   @@map("leads")
 }
