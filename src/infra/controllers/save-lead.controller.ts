@@ -1,16 +1,18 @@
 import { ControllerInterface } from '@/application/contracts/controller.interface'
+import { SaveLeadUseCaseInterface } from '@/domain/contracts/save-lead.interface'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { badRequest } from '@/shared/helpers/http.helper'
 import { HttpRequest } from '@/shared/types'
 
 export class SaveLeadController implements ControllerInterface {
+  constructor (private readonly saveLeadUseCase: SaveLeadUseCaseInterface) {}
   async execute (input: HttpRequest): Promise<any> {
     const inputError = this.inputValidator(input)
     if (inputError) {
       return badRequest(inputError)
     }
 
-    return null
+    await this.saveLeadUseCase.execute(input.body)
   }
 
   private inputValidator (input: HttpRequest): Error | undefined {
