@@ -9,8 +9,8 @@ export class SaveLeadUseCase implements SaveLeadUseCaseInterface {
     private readonly repository: SaveLeadRepositoryInterface
   ) {}
 
-  async execute (input: SaveLeadUseCaseInterface.Input): Promise<SaveLeadUseCaseInterface.Output> {
-    return await this.repository.save({
+  async execute (input: SaveLeadUseCaseInterface.Input): Promise<void> {
+    await this.repository.save({
       id: this.uuid.generate(),
       name: input.name.trim(),
       email: input.email.trim(),

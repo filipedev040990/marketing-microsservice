@@ -25,16 +25,6 @@ describe('SaveLeadUseCase', () => {
     }
 
     uuid.generate.mockReturnValue('anyUuid')
-
-    leadRepository.save.mockResolvedValue({
-      id: 'anyUuid',
-      name: 'anyName',
-      email: 'anyEmail',
-      birthDate: new Date('1990-01-01'),
-      phoneNumber: '32999652363',
-      status: 'lead',
-      createdAt: new Date()
-    })
   })
 
   afterAll(() => {
@@ -52,20 +42,6 @@ describe('SaveLeadUseCase', () => {
 
     expect(leadRepository.save).toHaveBeenCalledTimes(1)
     expect(leadRepository.save).toHaveBeenCalledWith({
-      id: 'anyUuid',
-      name: 'anyName',
-      email: 'anyEmail',
-      birthDate: new Date('1990-01-01'),
-      phoneNumber: '32999652363',
-      status: 'lead',
-      createdAt: new Date()
-    })
-  })
-
-  test('should return a created Lead', async () => {
-    const output = await sut.execute(input)
-
-    expect(output).toEqual({
       id: 'anyUuid',
       name: 'anyName',
       email: 'anyEmail',

@@ -1,9 +1,9 @@
 export interface SaveLeadRepositoryInterface {
-  save (input: SaveLeadRepositoryInterface.Props): Promise<SaveLeadRepositoryInterface.Props>
+  save (input: SaveLeadRepositoryInterface.Input): Promise<void>
 }
 
 export namespace SaveLeadRepositoryInterface {
-  export type Props = {
+  export type Input = {
     id: string
     name: string
     email: string

@@ -1,5 +1,5 @@
 export interface SaveLeadUseCaseInterface {
-  execute (input: SaveLeadUseCaseInterface.Input): Promise<SaveLeadUseCaseInterface.Output>
+  execute (input: SaveLeadUseCaseInterface.Input): Promise<void>
 }
 
 export namespace SaveLeadUseCaseInterface {
@@ -8,15 +8,5 @@ export namespace SaveLeadUseCaseInterface {
     email: string
     birthDate: Date
     phoneNumber: string
-  }
-
-  export type Output = {
-    id: string
-    name: string
-    email: string
-    birthDate: Date
-    status: string
-    phoneNumber: string
-    createdAt: Date
   }
 }
