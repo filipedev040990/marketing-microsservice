@@ -11,6 +11,7 @@ export namespace SaveLeadUseCaseInterface {
   }
 
   export type Output = {
+    id: string
     name: string
     email: string
     birthDate: Date

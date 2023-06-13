@@ -61,4 +61,13 @@ describe('SaveLeadController', () => {
     expect(saveLeadUseCase.execute).toHaveBeenCalledTimes(1)
     expect(saveLeadUseCase.execute).toHaveBeenCalledWith(input.body)
   })
+
+  test('should return 201', async () => {
+    const output = await sut.execute(input)
+
+    expect(output).toEqual({
+      statusCode: 201,
+      body: null
+    })
+  })
 })
