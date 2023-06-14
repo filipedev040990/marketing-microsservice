@@ -3,7 +3,7 @@ import { SaveLeadController } from './save-lead.controller'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { mock } from 'jest-mock-extended'
 import { SaveLeadUseCaseInterface } from '@/domain/contracts/save-lead.interface'
-import { serverError } from '@/shared/helpers/http.helper'
+import { badRequest, serverError } from '@/shared/helpers/http.helper'
 
 const saveLeadUseCase = mock<SaveLeadUseCaseInterface>()
 
@@ -36,10 +36,7 @@ describe('SaveLeadController', () => {
 
       const output = await sut.execute(input)
 
-      expect(output).toEqual({
-        statusCode: 400,
-        body: new MissingParamError(field)
-      })
+      expect(output).toEqual(badRequest(new MissingParamError(field)))
 
       input.body[field] = backupFieldValue
     }
@@ -50,10 +47,7 @@ describe('SaveLeadController', () => {
 
     const output = await sut.execute(input)
 
-    expect(output).toEqual({
-      statusCode: 400,
-      body: new InvalidParamError('email')
-    })
+    expect(output).toEqual(badRequest(new InvalidParamError('email')))
   })
 
   test('should call SaveLeadUseCase once and with correct values', async () => {

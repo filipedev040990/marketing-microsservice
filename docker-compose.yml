@@ -9,11 +9,14 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DATABASE_URL="postgresql://postgres:postgresd@localhost:5432/marketing?schema=public"
+      - DATABASE_URL="postgresql://postgres:postgres@postgres:5432/marketing?schema=public"
+      - PORT=3000
     volumes:
       - ./dist/:/app/dist/
       - ./package.json:/app/package.json
-    command: bash -c "npm install --omit=dev --force && npm run start"
+      - ./prisma:/app/prisma
+      - ./.husky:/app/.husky
+    command: bash -c "npm install --omit=dev --force && npx prisma migrate dev && npm run start"
     depends_on:
       - postgres
   postgres:

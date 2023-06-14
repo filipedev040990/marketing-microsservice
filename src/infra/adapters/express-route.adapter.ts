@@ -4,7 +4,9 @@ import { Request, Response } from 'express'
 
 export const expressRouteAdapter = (controller: ControllerInterface) => {
   return async (req: Request, res: Response) => {
-    const input: HttpRequest = req.body
+    const input: HttpRequest = {
+      body: req.body
+    }
     const output: HttpResponse = await controller.execute(input)
 
     const bodyOutput = output.statusCode === 500 ? { error: output.body.message } : output.body
