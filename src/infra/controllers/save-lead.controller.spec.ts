@@ -2,7 +2,7 @@ import { HttpRequest } from '@/shared/types'
 import { SaveLeadController } from './save-lead.controller'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { mock } from 'jest-mock-extended'
-import { SaveLeadUseCaseInterface } from '@/domain/contracts/save-lead.interface'
+import { SaveLeadUseCaseInterface } from '@/application/contracts/save-lead.interface'
 import { badRequest, serverError } from '@/shared/helpers/http.helper'
 
 const saveLeadUseCase = mock<SaveLeadUseCaseInterface>()

@@ -6,14 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = "postgresql://postgres:postgres@postgres:5432/marketing?schema=public"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Lead {
   id          String    @id
+  identifier  String
   name        String
   email       String
+  document    String
   birthDate   DateTime
   status      String
   phoneNumber String

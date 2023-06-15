@@ -1,5 +1,5 @@
 import { ControllerInterface } from '@/application/contracts/controller.interface'
-import { SaveLeadUseCaseInterface } from '@/domain/contracts/save-lead.interface'
+import { SaveLeadUseCaseInterface } from '@/application/contracts/save-lead.interface'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { badRequest, serverError, success } from '@/shared/helpers/http.helper'
 import { HttpRequest, HttpResponse } from '@/shared/types'

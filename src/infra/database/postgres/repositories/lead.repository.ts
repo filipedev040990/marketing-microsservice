@@ -1,4 +1,4 @@
-import { SaveLeadRepositoryInterface } from '@/domain/contracts/lead-repository.interface'
+import { SaveLeadRepositoryInterface } from '@/application/contracts/lead-repository.interface'
 import { prismaClient } from './prisma-client'
 
 export class LeadRepository implements SaveLeadRepositoryInterface {

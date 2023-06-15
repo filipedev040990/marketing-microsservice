@@ -9,7 +9,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DATABASE_URL="postgresql://postgres:postgres@postgres:5432/marketing?schema=public"
+      - DATABASE_URL="mysql://root:123456789@localhost:3306/marketing"
       - PORT=3000
     volumes:
       - ./dist/:/app/dist/
@@ -18,17 +18,21 @@ services:
       - ./.husky:/app/.husky
     command: bash -c "npm install --omit=dev --force && npx prisma migrate dev && npm run start"
     depends_on:
-      - postgres
-  postgres:
-    container_name: 'postgres'
-    image: postgres:14-alpine
-    volumes:
-      - db:/var/lib/postgresql/data
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      MYSQL_DATABASE: 'financeiro'
+      MYSQL_PASSWORD: '123456789'
+      MYSQL_ROOT_PASSWORD: '123456789'
     ports:
-      - "5432:5432"
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
 volumes:
-  db:
-    driver: local
+  my-db:
