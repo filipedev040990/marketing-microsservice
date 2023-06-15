@@ -13,9 +13,9 @@ export class SaveLeadController implements ControllerInterface {
         return badRequest(inputError)
       }
 
-      await this.saveLeadUseCase.execute(input.body)
+      const output = await this.saveLeadUseCase.execute(input.body)
 
-      return success(201, null)
+      return success(201, output)
     } catch (error) {
       return serverError(error)
     }

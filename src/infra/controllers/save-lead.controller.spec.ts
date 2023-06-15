@@ -13,6 +13,16 @@ describe('SaveLeadController', () => {
 
   beforeAll(() => {
     sut = new SaveLeadController(saveLeadUseCase)
+
+    saveLeadUseCase.execute.mockResolvedValue({
+      identifier: 'anyIdentifier',
+      name: 'anyName',
+      email: 'anyEmail',
+      document: 'anyDocument',
+      birthDate: new Date('1990-01-01'),
+      status: 'lead',
+      phoneNumber: '32999652363'
+    })
   })
 
   beforeEach(() => {
@@ -57,12 +67,20 @@ describe('SaveLeadController', () => {
     expect(saveLeadUseCase.execute).toHaveBeenCalledWith(input.body)
   })
 
-  test('should return 201', async () => {
+  test('should return 201 and a Lead', async () => {
     const output = await sut.execute(input)
 
     expect(output).toEqual({
       statusCode: 201,
-      body: null
+      body: {
+        identifier: 'anyIdentifier',
+        name: 'anyName',
+        email: 'anyEmail',
+        document: 'anyDocument',
+        birthDate: new Date('1990-01-01'),
+        status: 'lead',
+        phoneNumber: '32999652363'
+      }
     })
   })
 
