@@ -22,7 +22,7 @@ export class SaveLeadController implements ControllerInterface {
   }
 
   private inputValidator (input: HttpRequest): Error | undefined {
-    const requiredFields = ['name', 'email', 'birthDate', 'phoneNumber']
+    const requiredFields = ['name', 'email', 'document', 'birthDate', 'phoneNumber']
     for (const field of requiredFields) {
       if (!input.body[field]) {
         return new MissingParamError(field)

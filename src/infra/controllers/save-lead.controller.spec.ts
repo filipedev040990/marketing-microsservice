@@ -30,6 +30,7 @@ describe('SaveLeadController', () => {
       body: {
         name: 'AnyName',
         email: 'anyEmail@email.com',
+        document: 'anyDocument',
         birthDate: '1990-01-01',
         phoneNumber: '32995210252'
       }
@@ -37,7 +38,7 @@ describe('SaveLeadController', () => {
   })
 
   test('should return 400 if any required field does not provided', async () => {
-    const requiredFields = ['name', 'email', 'birthDate', 'phoneNumber']
+    const requiredFields = ['name', 'email', 'document', 'birthDate', 'phoneNumber']
 
     for (const field of requiredFields) {
       const backupFieldValue = input.body[field]
