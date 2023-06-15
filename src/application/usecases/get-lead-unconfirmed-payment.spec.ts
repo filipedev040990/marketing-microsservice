@@ -93,4 +93,43 @@ describe('GetLeadUnconfirmedPaymentUseCase', () => {
       createdAt: subtractDate(2)
     }])
   })
+
+  test('should return an empty array if all status is client', async () => {
+    leadRepository.getByStatus.mockResolvedValueOnce([{
+      id: 'anyId',
+      identifier: 'anyIdentifier',
+      name: 'anyName',
+      email: 'anyEmail@email.com',
+      document: 'anyDocument',
+      birthDate: new Date('1990-01-01'),
+      status: 'client',
+      phoneNumber: '32999521203',
+      createdAt: subtractDate(20),
+      updatedAt: subtractDate(20)
+    },
+    {
+      id: 'anotherId',
+      identifier: 'anotherIdentifier',
+      name: 'anotherName',
+      email: 'anotherEmail@email.com',
+      document: 'anotherDocument',
+      birthDate: new Date('2023-01-01'),
+      status: 'client',
+      phoneNumber: '32999521203',
+      createdAt: subtractDate(3),
+      updatedAt: subtractDate(3)
+    },
+    {
+      id: 'fakeId',
+      identifier: 'fakeIdentifier',
+      name: 'fakeName',
+      email: 'fakeEmail@email.com',
+      document: 'fakeDocument',
+      birthDate: new Date('2023-01-01'),
+      status: 'client',
+      phoneNumber: '32999521203',
+      createdAt: subtractDate(1),
+      updatedAt: subtractDate(1)
+    }])
+  })
 })
