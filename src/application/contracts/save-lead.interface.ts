@@ -6,6 +6,7 @@ export namespace SaveLeadUseCaseInterface {
   export type Input = {
     name: string
     email: string
+    document: string
     birthDate: Date
     phoneNumber: string
   }

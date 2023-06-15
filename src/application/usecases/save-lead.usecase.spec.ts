@@ -31,6 +31,7 @@ describe('SaveLeadUseCase', () => {
     input = {
       name: 'anyName',
       email: 'anyEmail',
+      document: 'anyDocument',
       birthDate: new Date('1990-01-01'),
       phoneNumber: '32999652363'
     }
@@ -58,6 +59,7 @@ describe('SaveLeadUseCase', () => {
       identifier: 'anyIdentifier',
       name: 'anyName',
       email: 'anyEmail',
+      document: 'anyDocument',
       birthDate: new Date('1990-01-01'),
       phoneNumber: '32999652363',
       status: 'lead',

@@ -15,6 +15,7 @@ export class SaveLeadUseCase implements SaveLeadUseCaseInterface {
       identifier: this.identifierGenerator(),
       name: input.name.trim(),
       email: input.email.trim(),
+      document: input.document,
       birthDate: new Date(input.birthDate),
       phoneNumber: input.phoneNumber.trim(),
       status: constants.leadStatus,

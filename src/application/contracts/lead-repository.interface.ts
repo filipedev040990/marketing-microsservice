@@ -8,6 +8,7 @@ export namespace SaveLeadRepositoryInterface {
     identifier: string
     name: string
     email: string
+    document: string
     birthDate: Date
     status: string
     phoneNumber: string
