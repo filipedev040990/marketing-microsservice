@@ -25,3 +25,15 @@ export namespace SaveLeadRepositoryInterface {
     phoneNumber: string
   }
 }
+
+export interface UpdateStatusLeadRepositoryInterface {
+  update(input: UpdateStatusLeadRepositoryInterface.Input): Promise<void>
+}
+
+export namespace UpdateStatusLeadRepositoryInterface {
+  export type Input = {
+    id: string
+    status: string
+    updatedAt: Date
+  }
+}
