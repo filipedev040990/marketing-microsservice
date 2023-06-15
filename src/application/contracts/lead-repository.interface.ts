@@ -39,11 +39,12 @@ export namespace UpdateStatusLeadRepositoryInterface {
 }
 
 export interface GetLeadByStatusRepositoryInterface {
-  getByStatus(status: string): Promise<GetLeadByStatusRepositoryInterface.Output>
+  getByStatus(status: string): Promise<GetLeadByStatusRepositoryInterface.Output[] | []>
 }
 
 export namespace GetLeadByStatusRepositoryInterface {
   export type Output = {
+    id: string
     identifier: string
     name: string
     email: string
@@ -51,5 +52,7 @@ export namespace GetLeadByStatusRepositoryInterface {
     birthDate: Date
     status: string
     phoneNumber: string
-  } | undefined
+    createdAt: Date
+    updatedAt: Date | null
+  }
 }

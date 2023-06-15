@@ -18,7 +18,7 @@ export class SaveLeadUseCase implements SaveLeadUseCaseInterface {
       document: input.document,
       birthDate: new Date(input.birthDate),
       phoneNumber: input.phoneNumber.trim(),
-      status: constants.leadStatus,
+      status: constants.LEAD_STATUS,
       createdAt: new Date()
     })
   }

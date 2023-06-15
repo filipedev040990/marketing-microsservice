@@ -1,5 +1,5 @@
 export interface GetLeadUnconfirmedPaymentUseCaseInterface {
-  execute(): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output>
+  execute(): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output[] | undefined>
 }
 
 export namespace GetLeadUnconfirmedPaymentUseCaseInterface {
@@ -7,6 +7,6 @@ export namespace GetLeadUnconfirmedPaymentUseCaseInterface {
     name: string
     email: string
     status: string
-    created_at: Date
-  } | undefined
+    createdAt: Date
+  }
 }
