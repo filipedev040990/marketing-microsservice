@@ -54,11 +54,11 @@ describe('GetUnconfirmedPaymentsJob', () => {
     expect(publishNotificationInExchange.execute).toHaveBeenCalledWith({
       exchange: 'notification',
       routingKey: 'notify_unconfirmed_payment',
-      message: {
+      message: JSON.stringify({
         subject: 'Inscrição não concluída',
         to: 'anotherEmail@email.com',
         body: 'Olá, anotherName tudo bem? Observamos que você não concluiu sua matricula em nossa plataforma. Para ajuda, contacte nosso suporte pelo email suporte@email.com.br'
-      }
+      })
     })
   })
 })

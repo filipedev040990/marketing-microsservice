@@ -9,7 +9,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DATABASE_URL="mysql://root:123456789@mysql:3306/marketing"
+      - DATABASE_URL="mysql://root:123456789@marketing_mysql:3306/marketing"
       - PORT=3000
     volumes:
       - ./dist/:/app/dist/
@@ -36,7 +36,3 @@ services:
       - my-db:/var/lib/mysql
 volumes:
   my-db:
-
-
-networks:
-  default:

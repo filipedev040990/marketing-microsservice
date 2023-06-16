@@ -21,7 +21,7 @@ export class GetUnconfirmedPaymentsJob {
         await this.publishNotificationInExchange.execute({
           exchange: constants.QUEUE_EXCHANGE_NOTIFICATION,
           routingKey: constants.UNCONFIRMED_PAYMENT_ROUTING_KEY,
-          message
+          message: JSON.stringify(message)
         })
       }
     }

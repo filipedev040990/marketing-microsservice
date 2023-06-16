@@ -17,6 +17,12 @@ describe('PublishNotificationInExchaneUseCase', () => {
     queue.publish.mockResolvedValue(true)
   })
 
+  test('should call queue.start once', async () => {
+    await sut.execute(input)
+
+    expect(queue.start).toHaveBeenCalledTimes(1)
+  })
+
   test('should call queue.publish once and with correct values', async () => {
     await sut.execute(input)
 
