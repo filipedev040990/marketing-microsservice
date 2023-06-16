@@ -1,38 +1,42 @@
-version: '3.5'
+# PARA SUBIR OS CONTAINERS, EXECUTE O DOCKER COMPOSE UP NO DOCKER-COMPOSE PRINCIPAL
 
-services:
-  marketing:
-    container_name: 'marketing'
-    image: node:16
-    restart: always
-    working_dir: /app
-    ports:
-      - 3000:3000
-    environment:
-      - DATABASE_URL="mysql://root:123456789@marketing_mysql:3306/marketing"
-      - PORT=3000
-    volumes:
-      - ./dist/:/app/dist/
-      - ./package.json:/app/package.json
-      - ./prisma:/app/prisma
-      - ./.husky:/app/.husky
-    command: bash -c "npm install --omit=dev --force && npx prisma migrate dev && npm run start"
-    depends_on:
-      - marketing_mysql
+# version: '3.5'
 
-  marketing_mysql:
-    container_name: marketing_mysql
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'financeiro'
-      MYSQL_PASSWORD: '123456789'
-      MYSQL_ROOT_PASSWORD: '123456789'
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - my-db:/var/lib/mysql
-volumes:
-  my-db:
+# services:
+#   marketing:
+#     container_name: 'marketing'
+#     image: node:16
+#     restart: always
+#     working_dir: /app
+#     ports:
+#       - 3000:3000
+#     environment:
+#       - DATABASE_URL="mysql://root:123456789@marketing_mysql:3306/marketing"
+#       - PORT=3000
+#     volumes:
+#       - ./dist/:/app/dist/
+#       - ./package.json:/app/package.json
+#       - ./prisma:/app/prisma
+#       - ./.husky:/app/.husky
+#     command: bash -c "npm install --omit=dev --force && npx prisma migrate dev && npm run start"
+#     depends_on:
+#       - marketing_mysql
+
+#   marketing_mysql:
+#     container_name: marketing_mysql
+#     image: mysql:8.0
+#     restart: always
+#     environment:
+#       MYSQL_DATABASE: 'financeiro'
+#       MYSQL_PASSWORD: '123456789'
+#       MYSQL_ROOT_PASSWORD: '123456789'
+#     ports:
+#       - '3306:3306'
+#     expose:
+#       - '3306'
+#     volumes:
+#       - my-db:/var/lib/mysql
+# volumes:
+#   my-db:
+
+
