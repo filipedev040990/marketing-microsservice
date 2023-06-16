@@ -1,11 +1,13 @@
 import { GetLeadUnconfirmedPaymentUseCaseInterface } from '@/application/contracts/get-lead-unconfirmed-payment-usecase.interface'
 import { PublishNotificationInExchaneUseCaseInterface } from '@/application/contracts/publish-notification-in-exchange-usecase.interface'
+import { SaveNotificationUseCaseInterface } from '@/application/contracts/save-notification-usecase.interface'
 import constants from '@/shared/constants'
 
 export class GetUnconfirmedPaymentsJob {
   constructor (
     private readonly getLeadUnconfirmedPaymentUseCase: GetLeadUnconfirmedPaymentUseCaseInterface,
-    private readonly publishNotificationInExchange: PublishNotificationInExchaneUseCaseInterface
+    private readonly publishNotificationInExchange: PublishNotificationInExchaneUseCaseInterface,
+    private readonly saveNotificationUseCase: SaveNotificationUseCaseInterface
   ) {}
 
   async execute (): Promise<void> {
@@ -23,6 +25,8 @@ export class GetUnconfirmedPaymentsJob {
           routingKey: constants.UNCONFIRMED_PAYMENT_ROUTING_KEY,
           message: JSON.stringify(message)
         })
+
+        await this.saveNotificationUseCase.execute(lead.email)
       }
     }
   }

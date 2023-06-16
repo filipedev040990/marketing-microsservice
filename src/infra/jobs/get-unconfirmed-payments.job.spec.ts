@@ -2,15 +2,17 @@ import { GetLeadUnconfirmedPaymentUseCaseInterface } from '@/application/contrac
 import { mock } from 'jest-mock-extended'
 import { GetUnconfirmedPaymentsJob } from './get-unconfirmed-payments.job'
 import { PublishNotificationInExchaneUseCaseInterface } from '@/application/contracts/publish-notification-in-exchange-usecase.interface'
+import { SaveNotificationUseCaseInterface } from '@/application/contracts/save-notification-usecase.interface'
 
 const getLeadUnconfirmedPaymentUseCase = mock<GetLeadUnconfirmedPaymentUseCaseInterface>()
 const publishNotificationInExchange = mock<PublishNotificationInExchaneUseCaseInterface>()
+const saveNotificationUseCase = mock<SaveNotificationUseCaseInterface>()
 
 describe('GetUnconfirmedPaymentsJob', () => {
   let sut: GetUnconfirmedPaymentsJob
 
   beforeAll(() => {
-    sut = new GetUnconfirmedPaymentsJob(getLeadUnconfirmedPaymentUseCase, publishNotificationInExchange)
+    sut = new GetUnconfirmedPaymentsJob(getLeadUnconfirmedPaymentUseCase, publishNotificationInExchange, saveNotificationUseCase)
 
     getLeadUnconfirmedPaymentUseCase.execute.mockResolvedValue([
       {
@@ -60,5 +62,11 @@ describe('GetUnconfirmedPaymentsJob', () => {
         body: 'Olá, anotherName tudo bem? Observamos que você não concluiu sua matricula em nossa plataforma. Para ajuda, contacte nosso suporte pelo email suporte@email.com.br'
       })
     })
+  })
+
+  test('should call saveNotificationUseCase', async () => {
+    await sut.execute()
+
+    expect(saveNotificationUseCase.execute).toHaveBeenCalled()
   })
 })
