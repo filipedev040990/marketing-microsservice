@@ -69,4 +69,19 @@ describe('GetUnconfirmedPaymentsJob', () => {
 
     expect(saveNotificationUseCase.execute).toHaveBeenCalled()
   })
+
+  test('should call saveNotificationUseCase with correct values', async () => {
+    getLeadUnconfirmedPaymentUseCase.execute.mockResolvedValueOnce([
+      {
+        name: 'anotherName',
+        email: 'anotherEmail@email.com',
+        status: 'lead',
+        createdAt: new Date('anyDate')
+      }])
+
+    await sut.execute()
+
+    expect(saveNotificationUseCase.execute).toHaveBeenCalledTimes(1)
+    expect(saveNotificationUseCase.execute).toHaveBeenCalledWith('anotherEmail@email.com')
+  })
 })
