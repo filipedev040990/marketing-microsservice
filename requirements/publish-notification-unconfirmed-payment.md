@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. ⛔ Se houver leads nessa situação, deve publicar uma mensagem na fila send_notification
+1. ✅ Se houver leads nessa situação, deve publicar uma mensagem na fila send_notification
 
 
 ## Objeto a ser enviado pra fila

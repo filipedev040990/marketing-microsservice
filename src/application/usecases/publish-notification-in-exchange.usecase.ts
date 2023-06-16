@@ -4,7 +4,6 @@ import { QueueInterface } from '../contracts/queue-consume.interface'
 export class PublishNotificationInExchaneUseCase implements PublishNotificationInExchaneUseCaseInterface {
   constructor (private readonly queue: QueueInterface) {}
   async execute ({ exchange, routingKey, message }: PublishNotificationInExchaneUseCaseInterface.Input): Promise<boolean> {
-    await this.queue.publish(exchange, routingKey, message)
-    return true
+    return await this.queue.publish(exchange, routingKey, message)
   }
 }
