@@ -1,4 +1,5 @@
 import { GetLeadByStatusRepositoryInterface } from '../contracts/lead-repository.interface'
+import { GetNotificationByEmailRepository } from '../contracts/notification-repository.interface'
 import { GetLeadUnconfirmedPaymentUseCase } from './get-lead-unconfirmed-payment'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
@@ -10,11 +11,12 @@ const subtractDate = (days: number): Date => {
 describe('GetLeadUnconfirmedPaymentUseCase', () => {
   const status: string = 'lead'
   const leadRepository = mock<GetLeadByStatusRepositoryInterface>()
+  const notificationRepository = mock<GetNotificationByEmailRepository>()
   let sut: GetLeadUnconfirmedPaymentUseCase
 
   beforeAll(() => {
     MockDate.set(new Date())
-    sut = new GetLeadUnconfirmedPaymentUseCase(leadRepository)
+    sut = new GetLeadUnconfirmedPaymentUseCase(leadRepository, notificationRepository)
 
     leadRepository.getByStatus.mockResolvedValue([{
       id: 'anyId',
@@ -77,6 +79,26 @@ describe('GetLeadUnconfirmedPaymentUseCase', () => {
     expect(leadRepository.getByStatus).toHaveBeenCalledWith(status)
   })
 
+  test('should call NotificationRepository.getByEmail with correct values', async () => {
+    leadRepository.getByStatus.mockResolvedValueOnce([{
+      id: 'anyId',
+      identifier: 'anyIdentifier',
+      name: 'anyName',
+      email: 'anyEmail@email.com',
+      document: 'anyDocument',
+      birthDate: new Date('1990-01-01'),
+      status: 'lead',
+      phoneNumber: '32999521203',
+      createdAt: subtractDate(2),
+      updatedAt: null
+    }])
+
+    await sut.execute()
+
+    expect(notificationRepository.getByEmail).toHaveBeenCalledTimes(1)
+    expect(notificationRepository.getByEmail).toHaveBeenCalledWith('anyEmail@email.com')
+  })
+
   test('should return only when createAt is greater than 48 hours and status is lead', async () => {
     const output = await sut.execute()
 
@@ -131,5 +153,9 @@ describe('GetLeadUnconfirmedPaymentUseCase', () => {
       createdAt: subtractDate(1),
       updatedAt: subtractDate(1)
     }])
+
+    const output = await sut.execute()
+
+    expect(output).toEqual([])
   })
 })

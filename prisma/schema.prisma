@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:123456789@mysql:3306/marketing"
+  url      = "mysql://root:123456789@192.168.240.3:3306/marketing"
 }
 
 model Lead {
@@ -23,4 +23,12 @@ model Lead {
   updatedAt   DateTime?
 
   @@map("leads")
+}
+
+model Notifications {
+  id     String   @id
+  email  String
+  sendAt DateTime
+
+  @@map("notifications")
 }

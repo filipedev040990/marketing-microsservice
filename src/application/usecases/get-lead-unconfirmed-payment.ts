@@ -1,9 +1,14 @@
 import constants from '@/shared/constants'
 import { GetLeadUnconfirmedPaymentUseCaseInterface } from '../contracts/get-lead-unconfirmed-payment-usecase.interface'
 import { GetLeadByStatusRepositoryInterface } from '../contracts/lead-repository.interface'
+import { GetNotificationByEmailRepository } from '../contracts/notification-repository.interface'
 
 export class GetLeadUnconfirmedPaymentUseCase implements GetLeadUnconfirmedPaymentUseCaseInterface {
-  constructor (private readonly repository: GetLeadByStatusRepositoryInterface) {}
+  constructor (
+    private readonly repository: GetLeadByStatusRepositoryInterface,
+    private readonly notificationRepository: GetNotificationByEmailRepository
+  ) {}
+
   async execute (): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output[] | []> {
     const output: GetLeadUnconfirmedPaymentUseCaseInterface.Output[] = []
     const leads = await this.repository.getByStatus(constants.LEAD_STATUS)
@@ -11,6 +16,7 @@ export class GetLeadUnconfirmedPaymentUseCase implements GetLeadUnconfirmedPayme
     if (leads) {
       for (const lead of leads) {
         const unconfirmedPaymentDays = this.calculateUnconfirmedPaymentDays(lead.createdAt)
+        await this.notificationRepository.getByEmail(lead.email)
         if (lead.status === constants.LEAD_STATUS && unconfirmedPaymentDays >= constants.DAYS_UNCONFIRMED_PAYMENT_TO_SEND_NOTIFICATION) {
           output.push({
             name: lead.name,
