@@ -1,12 +1,12 @@
-export interface GetNotificationByEmailRepository {
+export interface GetNotificationByEmailRepositoryInterface {
   getByEmail (email: string): Promise<string>
 }
 
-export interface SaveNotificationRepository {
-  save(input: SaveNotificationRepository.Input): Promise<void>
+export interface SaveNotificationRepositoryInterface {
+  save(input: SaveNotificationRepositoryInterface.Input): Promise<void>
 }
 
-export namespace SaveNotificationRepository {
+export namespace SaveNotificationRepositoryInterface {
   export type Input = {
     email: string
     sendAt: Date

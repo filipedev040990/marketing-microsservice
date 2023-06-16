@@ -1,12 +1,12 @@
 import constants from '@/shared/constants'
 import { GetLeadUnconfirmedPaymentUseCaseInterface } from '../contracts/get-lead-unconfirmed-payment-usecase.interface'
 import { GetLeadByStatusRepositoryInterface } from '../contracts/lead-repository.interface'
-import { GetNotificationByEmailRepository } from '../contracts/notification-repository.interface'
+import { GetNotificationByEmailRepositoryInterface } from '../contracts/notification-repository.interface'
 
 export class GetLeadUnconfirmedPaymentUseCase implements GetLeadUnconfirmedPaymentUseCaseInterface {
   constructor (
     private readonly repository: GetLeadByStatusRepositoryInterface,
-    private readonly notificationRepository: GetNotificationByEmailRepository
+    private readonly notificationRepository: GetNotificationByEmailRepositoryInterface
   ) {}
 
   async execute (): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output[] | []> {

@@ -1,5 +1,5 @@
 import { GetLeadByStatusRepositoryInterface } from '../contracts/lead-repository.interface'
-import { GetNotificationByEmailRepository } from '../contracts/notification-repository.interface'
+import { GetNotificationByEmailRepositoryInterface } from '../contracts/notification-repository.interface'
 import { GetLeadUnconfirmedPaymentUseCase } from './get-lead-unconfirmed-payment'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
@@ -11,7 +11,7 @@ const subtractDate = (days: number): Date => {
 describe('GetLeadUnconfirmedPaymentUseCase', () => {
   const status: string = 'lead'
   const leadRepository = mock<GetLeadByStatusRepositoryInterface>()
-  const notificationRepository = mock<GetNotificationByEmailRepository>()
+  const notificationRepository = mock<GetNotificationByEmailRepositoryInterface>()
   let sut: GetLeadUnconfirmedPaymentUseCase
 
   beforeAll(() => {
