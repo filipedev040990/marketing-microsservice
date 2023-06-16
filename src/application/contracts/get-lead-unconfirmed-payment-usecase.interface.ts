@@ -1,5 +1,5 @@
 export interface GetLeadUnconfirmedPaymentUseCaseInterface {
-  execute(): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output[] | undefined>
+  execute(): Promise<GetLeadUnconfirmedPaymentUseCaseInterface.Output[] | []>
 }
 
 export namespace GetLeadUnconfirmedPaymentUseCaseInterface {
