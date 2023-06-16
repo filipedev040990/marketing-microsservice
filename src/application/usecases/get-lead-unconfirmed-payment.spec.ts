@@ -99,7 +99,27 @@ describe('GetLeadUnconfirmedPaymentUseCase', () => {
     expect(notificationRepository.getByEmail).toHaveBeenCalledWith('anyEmail@email.com')
   })
 
-  test('should return only when createAt is greater than 48 hours and status is lead', async () => {
+  test('should return an empty array if already sent notification to this email', async () => {
+    notificationRepository.getByEmail.mockResolvedValueOnce('anyEmail@email.com')
+    leadRepository.getByStatus.mockResolvedValueOnce([{
+      id: 'anyId',
+      identifier: 'anyIdentifier',
+      name: 'anyName',
+      email: 'anyEmail@email.com',
+      document: 'anyDocument',
+      birthDate: new Date('1990-01-01'),
+      status: 'lead',
+      phoneNumber: '32999521203',
+      createdAt: subtractDate(2),
+      updatedAt: null
+    }])
+
+    const output = await sut.execute()
+
+    expect(output).toEqual([])
+  })
+
+  test('should return only when createAt is greater than 48 hours and status is lead and not already notification sent', async () => {
     const output = await sut.execute()
 
     expect(output).toEqual([{

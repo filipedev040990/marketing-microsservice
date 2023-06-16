@@ -16,8 +16,12 @@ export class GetLeadUnconfirmedPaymentUseCase implements GetLeadUnconfirmedPayme
     if (leads) {
       for (const lead of leads) {
         const unconfirmedPaymentDays = this.calculateUnconfirmedPaymentDays(lead.createdAt)
-        await this.notificationRepository.getByEmail(lead.email)
-        if (lead.status === constants.LEAD_STATUS && unconfirmedPaymentDays >= constants.DAYS_UNCONFIRMED_PAYMENT_TO_SEND_NOTIFICATION) {
+        const notificationAlreadySent = await this.notificationRepository.getByEmail(lead.email)
+        if (
+          lead.status === constants.LEAD_STATUS &&
+          unconfirmedPaymentDays >= constants.DAYS_UNCONFIRMED_PAYMENT_TO_SEND_NOTIFICATION &&
+          !notificationAlreadySent
+        ) {
           output.push({
             name: lead.name,
             email: lead.email,
