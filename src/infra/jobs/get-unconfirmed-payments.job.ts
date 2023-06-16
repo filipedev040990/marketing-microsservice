@@ -2,7 +2,7 @@ import { GetLeadUnconfirmedPaymentUseCaseInterface } from '@/application/contrac
 import { PublishNotificationInExchaneUseCaseInterface } from '@/application/contracts/publish-notification-in-exchange-usecase.interface'
 import constants from '@/shared/constants'
 
-export class GetUnconfirmedPaymentsBot {
+export class GetUnconfirmedPaymentsJob {
   constructor (
     private readonly getLeadUnconfirmedPaymentUseCase: GetLeadUnconfirmedPaymentUseCaseInterface,
     private readonly publishNotificationInExchange: PublishNotificationInExchaneUseCaseInterface

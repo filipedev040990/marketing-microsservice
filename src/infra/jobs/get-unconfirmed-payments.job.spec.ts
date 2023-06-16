@@ -1,16 +1,16 @@
 import { GetLeadUnconfirmedPaymentUseCaseInterface } from '@/application/contracts/get-lead-unconfirmed-payment-usecase.interface'
 import { mock } from 'jest-mock-extended'
-import { GetUnconfirmedPaymentsBot } from './get-unconfirmed-payments.bot'
+import { GetUnconfirmedPaymentsJob } from './get-unconfirmed-payments.job'
 import { PublishNotificationInExchaneUseCaseInterface } from '@/application/contracts/publish-notification-in-exchange-usecase.interface'
 
 const getLeadUnconfirmedPaymentUseCase = mock<GetLeadUnconfirmedPaymentUseCaseInterface>()
 const publishNotificationInExchange = mock<PublishNotificationInExchaneUseCaseInterface>()
 
-describe('GetUnconfirmedPaymentsBot', () => {
-  let sut: GetUnconfirmedPaymentsBot
+describe('GetUnconfirmedPaymentsJob', () => {
+  let sut: GetUnconfirmedPaymentsJob
 
   beforeAll(() => {
-    sut = new GetUnconfirmedPaymentsBot(getLeadUnconfirmedPaymentUseCase, publishNotificationInExchange)
+    sut = new GetUnconfirmedPaymentsJob(getLeadUnconfirmedPaymentUseCase, publishNotificationInExchange)
 
     getLeadUnconfirmedPaymentUseCase.execute.mockResolvedValue([
       {
