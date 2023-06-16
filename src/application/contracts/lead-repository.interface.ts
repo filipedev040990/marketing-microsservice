@@ -32,7 +32,7 @@ export interface UpdateStatusLeadRepositoryInterface {
 
 export namespace UpdateStatusLeadRepositoryInterface {
   export type Input = {
-    id: string
+    identifier: string
     status: string
     updatedAt: Date
   }

@@ -5,7 +5,7 @@ export class UpdateStatusLeadUseCase implements UpdateStatusLeadUseCaseInterface
   constructor (private readonly repository: UpdateStatusLeadRepositoryInterface) {}
   async execute (input: UpdateStatusLeadUseCaseInterface.Input): Promise<void> {
     await this.repository.update({
-      id: input.id,
+      identifier: input.identifier,
       status: input.status,
       updatedAt: new Date()
     })

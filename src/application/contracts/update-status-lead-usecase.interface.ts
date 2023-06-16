@@ -4,7 +4,7 @@ export interface UpdateStatusLeadUseCaseInterface {
 
 export namespace UpdateStatusLeadUseCaseInterface {
   export type Input = {
-    id: string
+    identifier: string
     status: string
   }
 }

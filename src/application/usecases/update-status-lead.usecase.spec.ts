@@ -13,7 +13,7 @@ describe('UpdateStatusLeadUseCase', () => {
     MockDate.set(new Date())
     sut = new UpdateStatusLeadUseCase(leadRepository)
     input = {
-      id: 'anyId',
+      identifier: 'anyIdentifier',
       status: 'client'
     }
   })
@@ -27,7 +27,7 @@ describe('UpdateStatusLeadUseCase', () => {
 
     expect(leadRepository.update).toHaveBeenCalledTimes(1)
     expect(leadRepository.update).toHaveBeenCalledWith({
-      id: 'anyId',
+      identifier: 'anyIdentifier',
       status: 'client',
       updatedAt: new Date()
     })
