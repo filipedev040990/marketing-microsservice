@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. ✅ Publica uma mensagem na fila send_notification
+1. ✅ Publica uma mensagem na exchange notification
 
 
 ✅

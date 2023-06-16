@@ -18,10 +18,10 @@ services:
       - ./.husky:/app/.husky
     command: bash -c "npm install --omit=dev --force && npx prisma migrate dev && npm run start"
     depends_on:
-      - mysql
+      - marketing_mysql
 
-  mysql:
-    container_name: mysql
+  marketing_mysql:
+    container_name: marketing_mysql
     image: mysql:8.0
     restart: always
     environment:
@@ -36,3 +36,7 @@ services:
       - my-db:/var/lib/mysql
 volumes:
   my-db:
+
+
+networks:
+  default:

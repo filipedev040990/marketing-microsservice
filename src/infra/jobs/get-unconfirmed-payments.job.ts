@@ -19,8 +19,8 @@ export class GetUnconfirmedPaymentsJob {
         }
 
         await this.publishNotificationInExchange.execute({
-          exchange: constants.QUEUE_EXCHANGE_SEND_NOTIFICATION,
-          routingKey: constants.QUEUE_EXCHANGE_SEND_NOTIFICATION_ROUNTING_KEY,
+          exchange: constants.QUEUE_EXCHANGE_NOTIFICATION,
+          routingKey: constants.UNCONFIRMED_PAYMENT_ROUTING_KEY,
           message
         })
       }
