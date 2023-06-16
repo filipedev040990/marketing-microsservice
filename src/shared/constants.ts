@@ -8,5 +8,6 @@ export default {
   UNCONFIRMED_PAYMENT_NOTIFICATION_SUBJECT: 'Inscrição não concluída',
   SUPPORT_EMAIL: 'suporte@email.com.br',
   QUEUE_EXCHANGE_SEND_NOTIFICATION: 'send_notification',
-  QUEUE_EXCHANGE_SEND_NOTIFICATION_ROUNTING_KEY: 'unconfirmed_payments'
+  QUEUE_EXCHANGE_SEND_NOTIFICATION_ROUNTING_KEY: 'unconfirmed_payments',
+  RABBIT_MQ_URI: 'amqp://admin:admin@rabbitmq:5672'
 }

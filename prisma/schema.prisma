@@ -7,12 +7,12 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:123456789@mysql:3306/marketing"
+  url      = "mysql://root:123456789@172.18.0.2:3306/marketing"
 }
 
 model Lead {
   id          String    @id
-  identifier  String
+  identifier  String    @unique
   name        String
   email       String
   document    String

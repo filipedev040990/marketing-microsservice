@@ -1,7 +1,7 @@
-import { SaveLeadRepositoryInterface, UpdateStatusLeadRepositoryInterface } from '@/application/contracts/lead-repository.interface'
+import { GetLeadByStatusRepositoryInterface, SaveLeadRepositoryInterface, UpdateStatusLeadRepositoryInterface } from '@/application/contracts/lead-repository.interface'
 import { prismaClient } from './prisma-client'
 
-export class LeadRepository implements SaveLeadRepositoryInterface, UpdateStatusLeadRepositoryInterface {
+export class LeadRepository implements SaveLeadRepositoryInterface, UpdateStatusLeadRepositoryInterface, GetLeadByStatusRepositoryInterface {
   async save (input: SaveLeadRepositoryInterface.Input): Promise<SaveLeadRepositoryInterface.Output> {
     const lead = await prismaClient.lead.create({
       data: {
@@ -34,7 +34,15 @@ export class LeadRepository implements SaveLeadRepositoryInterface, UpdateStatus
         status: input.status,
         updatedAt: input.updatedAt
       },
-      where: { id: input.id }
+      where: { identifier: input.identifier }
     })
+  }
+
+  async getByStatus (status: string): Promise<GetLeadByStatusRepositoryInterface.Output[] | []> {
+    const leads = await prismaClient.lead.findMany({
+      where: { status }
+    })
+
+    return leads ?? []
   }
 }
