@@ -2,15 +2,18 @@ import { SaveNotificationRepositoryInterface } from '../contracts/notification-r
 import { SaveNotificationUseCase } from './save-notification.usecase'
 import MockDate from 'mockdate'
 import { mock } from 'jest-mock-extended'
+import { UUIDGeneratorInterface } from '../contracts/uuid-generator.interface'
 
 const notificationRepository = mock<SaveNotificationRepositoryInterface>()
+const uuidGenerator = mock<UUIDGeneratorInterface>()
 
 describe('SaveNotificationUseCaseInterface', () => {
   let sut: SaveNotificationUseCase
 
   beforeAll(() => {
     MockDate.set(new Date())
-    sut = new SaveNotificationUseCase(notificationRepository)
+    uuidGenerator.generate.mockReturnValue('anyUuid')
+    sut = new SaveNotificationUseCase(notificationRepository, uuidGenerator)
   })
 
   afterAll(() => {
@@ -22,6 +25,7 @@ describe('SaveNotificationUseCaseInterface', () => {
 
     expect(notificationRepository.save).toHaveBeenCalledTimes(1)
     expect(notificationRepository.save).toHaveBeenCalledWith({
+      id: 'anyUuid',
       email: 'anyEmail@email.com',
       sendAt: new Date()
     })

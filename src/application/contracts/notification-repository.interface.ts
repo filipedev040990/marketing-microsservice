@@ -1,5 +1,5 @@
 export interface GetNotificationByEmailRepositoryInterface {
-  getByEmail (email: string): Promise<string>
+  getByEmail (email: string): Promise<string | undefined>
 }
 
 export interface SaveNotificationRepositoryInterface {
@@ -8,6 +8,7 @@ export interface SaveNotificationRepositoryInterface {
 
 export namespace SaveNotificationRepositoryInterface {
   export type Input = {
+    id: string
     email: string
     sendAt: Date
   }
