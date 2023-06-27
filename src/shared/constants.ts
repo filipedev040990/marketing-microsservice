@@ -9,5 +9,5 @@ export default {
   SUPPORT_EMAIL: 'suporte@email.com.br',
   QUEUE_EXCHANGE_NOTIFICATION: 'marketing_notification',
   UNCONFIRMED_PAYMENT_ROUTING_KEY: 'notify_unconfirmed_payment',
-  RABBIT_MQ_URI: 'amqp://admin:admin@rabbitmq:5672'
+  RABBIT_MQ_URI: 'amqp://admin:admin/pN@rabbitmq:5672'
 }
