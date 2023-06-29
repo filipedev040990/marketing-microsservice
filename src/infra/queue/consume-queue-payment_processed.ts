@@ -14,7 +14,7 @@ export class ConsumeQueuePaymentProcessed {
       const response = JSON.parse(message.content.toString())
       if (response.status === constants.PAYMENT_APPROVED) {
         await this.leadUseCase.execute({
-          identifier: response.identifier,
+          identifier: response.client.identifier,
           status: constants.CLIENT_STATUS
         })
       }
