@@ -54,7 +54,7 @@ describe('GetUnconfirmedPaymentsJob', () => {
 
     expect(publishNotificationInExchange.execute).toHaveBeenCalledTimes(1)
     expect(publishNotificationInExchange.execute).toHaveBeenCalledWith({
-      exchange: 'marketing_notification',
+      exchange: 'payments',
       routingKey: 'notify_unconfirmed_payment',
       message: JSON.stringify({
         subject: 'Inscrição não concluída',

@@ -7,7 +7,7 @@ export default {
   PAYMENT_REFUSED: 'refused',
   UNCONFIRMED_PAYMENT_NOTIFICATION_SUBJECT: 'Inscrição não concluída',
   SUPPORT_EMAIL: 'suporte@email.com.br',
-  QUEUE_EXCHANGE_NOTIFICATION: 'marketing_notification',
+  QUEUE_EXCHANGE_NOTIFICATION: 'payments',
   UNCONFIRMED_PAYMENT_ROUTING_KEY: 'notify_unconfirmed_payment',
-  RABBIT_MQ_URI: 'amqp://admin:admin@rabbitmq:5672'
+  RABBIT_MQ_URI: 'amqp://guest:guest@rabbitmq:5672'
 }
